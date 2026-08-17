@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      width: 264px;
+      margin: 0;
+      padding: 14px 16px;
+      background: #0b0d12;
+      color: #e6e8ee;
+      font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+    }
+    h1 { font-size: 14px; margin: 0 0 10px; }
+    .rate { font-size: 20px; font-weight: 600; }
+    .meta { margin-top: 4px; color: #8b90a0; font-size: 11px; line-height: 1.4; }
+    button {
+      margin-top: 10px;
+      padding: 7px 0;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    button:disabled { opacity: 0.6; cursor: default; }
+    #refresh { width: 100%; }
+    .manual { display: flex; gap: 8px; margin-top: 8px; }
+    .manual input {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 8px;
+      border: 1px solid #2a2e3a;
+      border-radius: 6px;
+      background: #14161d;
+      color: #e6e8ee;
+      font-size: 12px;
+    }
+    .manual input::placeholder { color: #5c6170; }
+    .manual button { margin-top: 0; padding: 6px 12px; white-space: nowrap; }
+    .error { color: #f87171; font-size: 12px; margin-top: 8px; }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #23262f;
+    }
+    .switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: #2a2e3a;
+      border-radius: 10px; transition: 0.2s;
+    }
+    .slider::before {
+      content: ""; position: absolute; width: 14px; height: 14px;
+      left: 3px; top: 3px; background: #8b90a0; border-radius: 50%; transition: 0.2s;
+    }
+    .switch input:checked + .slider { background: #2563eb; }
+    .switch input:checked + .slider::before { transform: translateX(16px); background: #fff; }
+    .hint { margin-top: 8px; color: #8b90a0; font-size: 11px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>OpenRouter 助手</h1>
+  <div class="rate"><span id="rate">—</span></div>
+  <div class="meta" id="meta"></div>
+  <button id="refresh">手动刷新汇率</button>
+  <div class="manual">
+    <input id="rateInput" type="number" step="0.0001" min="1" max="20" placeholder="手动输入汇率（如 7.25）" />
+    <button id="applyRate">应用</button>
+  </div>
+  <div class="error" id="error" hidden></div>
+  <div class="row">
+    <span>翻译界面文字</span>
+    <label class="switch">
+      <input type="checkbox" id="translate" checked />
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="hint">仅翻译界面与筛选术语，不修改模型名/描述，也不改页面结构，避免触发 Web 框架报错。</div>
+<script src="popup.js"></script>
+</body>
+</html>

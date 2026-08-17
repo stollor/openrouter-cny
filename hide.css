@@ -1,0 +1,13 @@
+/* OpenRouter 助手：翻译前隐藏页面，避免英文闪现
+   content.js 首次翻译完成后给 <html> 加 data-or-ready 解除隐藏；
+   CSS 动画作兜底，即使脚本异常页面也会在约 1.5s 后自动显示 */
+html:not([data-or-ready]) {
+  visibility: hidden;
+  animation: or-reveal 3s ease 0s forwards;
+}
+
+@keyframes or-reveal {
+  to {
+    visibility: visible;
+  }
+}

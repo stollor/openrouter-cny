@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "OpenRouter 助手 (USD→CNY + 翻译)",
+  "version": "1.3.3",
+  "description": "OpenRouter 全站：美元价格转人民币显示，界面术语精准翻译（不破坏页面）",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://qt.gtimg.cn/*",
+    "https://open.er-api.com/*",
+    "https://api.frankfurter.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://openrouter.ai/*"],
+      "js": ["dict.js", "common.js", "content.js"],
+      "css": ["hide.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "USD→CNY 汇率"
+  }
+}
